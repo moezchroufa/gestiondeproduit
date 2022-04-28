@@ -5,6 +5,7 @@
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="#FFFFFF"
+    tools:context="com.example.gestiondeproduit.activity_login"
     >
 
     <TextView

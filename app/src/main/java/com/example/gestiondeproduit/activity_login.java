@@ -29,6 +29,7 @@ public class activity_login extends AppCompatActivity{
     FirebaseDatabase firebaseDatabase; // entry point
     DatabaseReference databaseReference;
     FirebaseAuth mAuth;
+    String user_mail;
     final int MIN_PASSWORD_LENGTH = 6;
 
     @Override
@@ -98,6 +99,10 @@ public class activity_login extends AppCompatActivity{
                                 // Sign in success, update UI with the signed-in user's information
                                 Log.d(TAG, "signInWithEmail:success");
                                 FirebaseUser user = mAuth.getCurrentUser();
+
+                                Log.w(TAG, "login sucess of user :", task.getException());
+                                Toast.makeText(activity_login.this, "success",
+                                        Toast.LENGTH_SHORT).show();
                                 startActivity(new Intent(activity_login.this,basic_activity.class));
 
                             } else {

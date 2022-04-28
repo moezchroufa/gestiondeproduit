@@ -16,7 +16,7 @@ import com.learntodroid.pfescanner.R;
 
 public class camera extends AppCompatActivity {
 
-
+    public String content_result;
     Button btn_scan;
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -44,6 +44,7 @@ public class camera extends AppCompatActivity {
     {
         if(result.getContents() !=null)
         {
+            content_result = result.getContents();
             AlertDialog.Builder builder = new AlertDialog.Builder(camera.this);
             builder.setTitle("Result");
             builder.setMessage(result.getContents());

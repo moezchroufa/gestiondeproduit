@@ -7,11 +7,13 @@
         <entry key="..\:/Users/GAMING/AndroidStudioProjects/gestiondeproduit/app/src/main/res/drawable/databaselogo.xml" value="0.1" />
         <entry key="..\:/Users/GAMING/AndroidStudioProjects/gestiondeproduit/app/src/main/res/drawable/ic_gfglogo.xml" value="0.168" />
         <entry key="..\:/Users/GAMING/AndroidStudioProjects/gestiondeproduit/app/src/main/res/drawable/ic_launcher_background.xml" value="0.1" />
-        <entry key="..\:/Users/GAMING/AndroidStudioProjects/gestiondeproduit/app/src/main/res/layout/activity_login.xml" value="0.209375" />
+        <entry key="..\:/Users/GAMING/AndroidStudioProjects/gestiondeproduit/app/src/main/res/layout/activity_login.xml" value="0.1" />
         <entry key="..\:/Users/GAMING/AndroidStudioProjects/gestiondeproduit/app/src/main/res/layout/activity_signup.xml" value="0.1" />
         <entry key="..\:/Users/GAMING/AndroidStudioProjects/gestiondeproduit/app/src/main/res/layout/basic_activity.xml" value="0.1" />
-        <entry key="..\:/Users/GAMING/AndroidStudioProjects/gestiondeproduit/app/src/main/res/layout/cameraactivityx.xml" value="0.12239583333333333" />
+        <entry key="..\:/Users/GAMING/AndroidStudioProjects/gestiondeproduit/app/src/main/res/layout/cameraactivityx.xml" value="0.1" />
         <entry key="..\:/Users/GAMING/AndroidStudioProjects/gestiondeproduit/app/src/main/res/layout/card_item.xml" value="0.1" />
+        <entry key="..\:/Users/GAMING/AndroidStudioProjects/gestiondeproduit/app/src/main/res/layout/dashboard.xml" value="0.1" />
+        <entry key="..\:/Users/GAMING/AndroidStudioProjects/gestiondeproduit/app/src/main/res/layout/dashboard_activity.xml" value="0.1" />
       </map>
     </option>
   </component>
