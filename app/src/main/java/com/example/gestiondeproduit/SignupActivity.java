@@ -106,7 +106,7 @@ public class SignupActivity extends AppCompatActivity {
         return Patterns.EMAIL_ADDRESS.matcher(email).matches();
     }
 
-    // Hook Click Event
+
 
     public void performSignUp() {
         if (validateInput()) {
@@ -122,7 +122,7 @@ public class SignupActivity extends AppCompatActivity {
                         @Override
                         public void onComplete(@NonNull Task<AuthResult> task) {
                             if (task.isSuccessful()) {
-                                // Sign in success, update UI with the signed-in user's information
+
 
                                 FirebaseUser user = mAuth.getCurrentUser();
 
@@ -137,7 +137,7 @@ public class SignupActivity extends AppCompatActivity {
                     });
 
 
-            // Here you can call you API
+
 
         }
 

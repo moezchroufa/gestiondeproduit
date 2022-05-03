@@ -121,7 +121,6 @@ public class activity_login extends AppCompatActivity{
 
     public void goToSignup(View v) {
         // Open your SignUp Activity if the user wants to signup
-        // Visit this article to get SignupActivity code https://handyopinion.com/signup-activity-in-android-studio-kotlin-java/
         Intent intent = new Intent(this, SignupActivity.class);
         startActivity(intent);
     }

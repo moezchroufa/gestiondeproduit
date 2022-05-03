@@ -9,6 +9,8 @@ import android.os.Bundle;
 import android.widget.Button;
 import android.widget.Toast;
 
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 import com.google.zxing.integration.android.IntentIntegrator;
 import com.journeyapps.barcodescanner.ScanContract;
 import com.journeyapps.barcodescanner.ScanOptions;
@@ -18,6 +20,8 @@ public class camera extends AppCompatActivity {
 
     public String content_result;
     Button btn_scan;
+    FirebaseDatabase firebaseDatabase; // entry point
+    DatabaseReference databaseReference;
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
@@ -56,7 +60,14 @@ public class camera extends AppCompatActivity {
                     dialogInterface.dismiss();
                 }
             }).show();
+           firebaseDatabase= FirebaseDatabase.getInstance().getReference().getDatabase();
+           databaseReference = firebaseDatabase.getReference(content_result);
+           databaseReference.child("Number").setValue(10);
+           databaseReference.child("Ref").setValue(content_result);
+
         }
     });
+
+
 
 }
