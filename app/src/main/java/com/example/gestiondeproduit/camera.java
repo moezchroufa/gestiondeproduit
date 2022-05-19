@@ -16,10 +16,16 @@ import com.journeyapps.barcodescanner.ScanContract;
 import com.journeyapps.barcodescanner.ScanOptions;
 import com.learntodroid.pfescanner.R;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.util.Date;
+
 public class camera extends AppCompatActivity {
 
     public String content_result;
     Button btn_scan;
+    DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+    LocalDateTime now;
     FirebaseDatabase firebaseDatabase; // entry point
     DatabaseReference databaseReference;
     @Override
@@ -30,6 +36,7 @@ public class camera extends AppCompatActivity {
         btn_scan =findViewById(R.id.btn_scan);
         btn_scan.setOnClickListener(v->
         {
+            now = LocalDateTime.now();
             scanCode();
         });
     }
@@ -60,9 +67,13 @@ public class camera extends AppCompatActivity {
                     dialogInterface.dismiss();
                 }
             }).show();
+            // format : name,number,ref
+          //  String[] str = content_result.split(",");
+
            firebaseDatabase= FirebaseDatabase.getInstance().getReference().getDatabase();
            databaseReference = firebaseDatabase.getReference(content_result);
            databaseReference.child("Number").setValue(10);
+            databaseReference.child("Date").setValue(dtf.format(now));
            databaseReference.child("Ref").setValue(content_result);
 
         }

@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:background="#B1BBC3"
 
-    tools:context="com.example.gestiondeproduit.dashboard">
+    tools:context="com.example.gestiondeproduit.sensors">
 
     <ListView
         android:id="@+id/list1"

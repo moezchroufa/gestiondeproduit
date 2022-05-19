@@ -27,8 +27,8 @@ public class MenusGVAdapter extends ArrayAdapter<Menus> {
             listitemView = LayoutInflater.from(getContext()).inflate(R.layout.card_item, parent, false);
         }
         Menus menuModel = getItem(position);
-        TextView menuTV = listitemView.findViewById(R.id.idTVCourse);
-        ImageView menuIV = listitemView.findViewById(R.id.idIVcourse);
+        TextView menuTV = listitemView.findViewById(R.id.idTV);
+        ImageView menuIV = listitemView.findViewById(R.id.idIV);
         menuTV.setText(menuModel.getMenu_name());
         menuIV.setImageResource(menuModel.getImgid());
         return listitemView;

@@ -18,11 +18,12 @@ public class basic_activity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.basic_activity);
 
-        menusGV = findViewById(R.id.idGVcourses);
+        menusGV = findViewById(R.id.idGV);
 
         ArrayList<Menus> MenusModelArrayList = new ArrayList<Menus>();
         MenusModelArrayList.add(new Menus("DASHBOARD"));
         MenusModelArrayList.add(new Menus("CAMERA"));
+        MenusModelArrayList.add(new Menus("CONTROL SENSORS"));
 
 
         MenusGVAdapter adapter = new MenusGVAdapter(this, MenusModelArrayList);
@@ -38,6 +39,9 @@ public class basic_activity extends AppCompatActivity {
                 } else if (position == 1) {
                     Intent abc = new Intent(basic_activity.this, camera.class);
                     startActivity(abc);
+                }else if (position == 2){
+                    Intent sens = new Intent(basic_activity.this, sensors.class);
+                    startActivity(sens);
                 }
             }
         });
