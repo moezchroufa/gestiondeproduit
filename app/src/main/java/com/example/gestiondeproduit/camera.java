@@ -16,6 +16,7 @@ import com.journeyapps.barcodescanner.ScanContract;
 import com.journeyapps.barcodescanner.ScanOptions;
 import com.learntodroid.pfescanner.R;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Date;
@@ -26,6 +27,11 @@ public class camera extends AppCompatActivity {
     Button btn_scan;
     DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd/MM/yyyy");
     LocalDateTime now;
+    LocalDate exp_date,conversion_date;
+    String message_box;
+    custom_dialogue cdialogue;
+
+
     FirebaseDatabase firebaseDatabase; // entry point
     DatabaseReference databaseReference;
     @Override
@@ -37,6 +43,7 @@ public class camera extends AppCompatActivity {
         btn_scan.setOnClickListener(v->
         {
             now = LocalDateTime.now();
+            conversion_date = now.toLocalDate();
             scanCode();
         });
     }
@@ -56,25 +63,46 @@ public class camera extends AppCompatActivity {
         if(result.getContents() !=null)
         {
             content_result = result.getContents();
+            String[] str = content_result.split(",");
+            String product_name = str[0];
+            String product_ref = str[1];
+            String product_dateexp = str[2];
+            exp_date = LocalDate.parse(product_dateexp);
+            if (conversion_date.compareTo(exp_date) > 0){
+                message_box = "PRODUIT PERIME";
+            }else{
+                message_box = "PRODUIT NON PERIME";
+            }
             AlertDialog.Builder builder = new AlertDialog.Builder(camera.this);
-            builder.setTitle("Result");
-            builder.setMessage(result.getContents());
-            builder.setPositiveButton("OK", new DialogInterface.OnClickListener()
+            builder.setTitle("see products informations!");
+            builder.setMessage("Product :"+product_name);
+            builder.setMessage("Reference :"+product_ref);
+            builder.setMessage("STATUS:"+message_box);
+            builder.setPositiveButton("add", new DialogInterface.OnClickListener()
             {
                 @Override
                 public void onClick(DialogInterface dialogInterface, int i)
                 {
+                    custom_dialogue.NumberListener listener = new custom_dialogue.NumberListener() {
+                        @Override
+                        public void NumberEntered(String number) {
+                            databaseReference.child("Number").setValue(number);
+                        }
+                    };
+                    cdialogue = new custom_dialogue(getApplicationContext(),listener);
                     dialogInterface.dismiss();
                 }
             }).show();
             // format : name,number,ref
-          //  String[] str = content_result.split(",");
+
+
+
 
            firebaseDatabase= FirebaseDatabase.getInstance().getReference().getDatabase();
-           databaseReference = firebaseDatabase.getReference(content_result);
-           databaseReference.child("Number").setValue(10);
-            databaseReference.child("Date").setValue(dtf.format(now));
-           databaseReference.child("Ref").setValue(content_result);
+           databaseReference = firebaseDatabase.getReference(product_name);
+
+            databaseReference.child("Date exp").setValue(product_dateexp);
+           databaseReference.child("Ref").setValue(product_ref);
 
         }
     });
