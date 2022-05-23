@@ -11,9 +11,12 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 import com.learntodroid.pfescanner.R;
+import com.example.gestiondeproduit.camera;
 
-public class custom_dialogue extends Dialog {
+public class custom_dialogue extends AppCompatActivity{
 
     interface NumberListener {
         public void NumberEntered(String number);
@@ -23,14 +26,12 @@ public class custom_dialogue extends Dialog {
     private EditText editTextFullName;
     private Button buttonOK;
     private Button buttonCancel;
+    public FirebaseDatabase firebaseDatabase; // entry point
+    public DatabaseReference databaseReference;
 
     private custom_dialogue.NumberListener listener;
 
-    public custom_dialogue(Context context, custom_dialogue.NumberListener listener) {
-        super(context);
-        this.context = context;
-        this.listener = listener;
-    }
+
 
 
     @Override
@@ -60,7 +61,7 @@ public class custom_dialogue extends Dialog {
     // User click "OK" button.
     private void buttonOKClick()  {
         String number = this.editTextFullName.getText().toString();
-
+        databaseReference.child("quantité").setValue(number);
 /*
         if(number== null || number.isEmpty())  {
             Toast.makeText(this.context, "Please enter Number of products", Toast.LENGTH_LONG).show();
@@ -68,14 +69,12 @@ public class custom_dialogue extends Dialog {
         }
         this.dismiss(); // Close Dialog*/
 
-        if(this.listener!= null)  {
-            this.listener.NumberEntered(number);
-        }
+
     }
 
     // User click "Cancel" button.
     private void buttonCancelClick()  {
-        this.dismiss();
+
     }
 
 

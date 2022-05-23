@@ -19,6 +19,7 @@ import com.learntodroid.pfescanner.R;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+
 import java.util.Date;
 
 public class camera extends AppCompatActivity {
@@ -32,8 +33,8 @@ public class camera extends AppCompatActivity {
     custom_dialogue cdialogue;
 
 
-    FirebaseDatabase firebaseDatabase; // entry point
-    DatabaseReference databaseReference;
+    public FirebaseDatabase firebaseDatabase; // entry point
+    public DatabaseReference databaseReference;
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
@@ -43,7 +44,7 @@ public class camera extends AppCompatActivity {
         btn_scan.setOnClickListener(v->
         {
             now = LocalDateTime.now();
-            conversion_date = now.toLocalDate();
+
             scanCode();
         });
     }
@@ -67,12 +68,13 @@ public class camera extends AppCompatActivity {
             String product_name = str[0];
             String product_ref = str[1];
             String product_dateexp = str[2];
-            exp_date = LocalDate.parse(product_dateexp);
-            if (conversion_date.compareTo(exp_date) > 0){
-                message_box = "PRODUIT PERIME";
-            }else{
-                message_box = "PRODUIT NON PERIME";
-            }
+            firebaseDatabase= FirebaseDatabase.getInstance().getReference().getDatabase();
+            databaseReference = firebaseDatabase.getReference(product_name);
+            databaseReference.child("Date exp").setValue(product_dateexp);
+
+            databaseReference.child("Ref").setValue(product_ref);
+          //  exp_date = LocalDate.parse(product_dateexp);
+
             AlertDialog.Builder builder = new AlertDialog.Builder(camera.this);
             builder.setTitle("see products informations!");
             builder.setMessage("Product :"+product_name);
@@ -83,14 +85,10 @@ public class camera extends AppCompatActivity {
                 @Override
                 public void onClick(DialogInterface dialogInterface, int i)
                 {
-                    custom_dialogue.NumberListener listener = new custom_dialogue.NumberListener() {
-                        @Override
-                        public void NumberEntered(String number) {
-                            databaseReference.child("Number").setValue(number);
-                        }
-                    };
-                    cdialogue = new custom_dialogue(getApplicationContext(),listener);
-                    dialogInterface.dismiss();
+                    Intent def = new Intent(camera.this, custom_dialogue.class);
+                    startActivity(def);
+
+
                 }
             }).show();
             // format : name,number,ref
@@ -98,11 +96,7 @@ public class camera extends AppCompatActivity {
 
 
 
-           firebaseDatabase= FirebaseDatabase.getInstance().getReference().getDatabase();
-           databaseReference = firebaseDatabase.getReference(product_name);
 
-            databaseReference.child("Date exp").setValue(product_dateexp);
-           databaseReference.child("Ref").setValue(product_ref);
 
         }
     });
