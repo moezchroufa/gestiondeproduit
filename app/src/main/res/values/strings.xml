@@ -3,4 +3,6 @@
     <string name="gestiondeproduit" />
     <string name="account_login">Account Login</string>
     <string name="password">Password</string>
+    <string name="number" />
+    <string name="login" />
 </resources>

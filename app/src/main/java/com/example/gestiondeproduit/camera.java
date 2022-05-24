@@ -6,7 +6,9 @@ import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.Toast;
 
 import com.google.firebase.database.DatabaseReference;
@@ -30,7 +32,7 @@ public class camera extends AppCompatActivity {
     LocalDateTime now;
     LocalDate exp_date,conversion_date;
     String message_box;
-    custom_dialogue cdialogue;
+
 
 
     public FirebaseDatabase firebaseDatabase; // entry point
@@ -48,6 +50,9 @@ public class camera extends AppCompatActivity {
             scanCode();
         });
     }
+    public String getContent_result(){
+        return content_result;
+    }
 
     private void scanCode()
     {
@@ -64,43 +69,41 @@ public class camera extends AppCompatActivity {
         if(result.getContents() !=null)
         {
             content_result = result.getContents();
-            String[] str = content_result.split(",");
-            String product_name = str[0];
-            String product_ref = str[1];
-            String product_dateexp = str[2];
-            firebaseDatabase= FirebaseDatabase.getInstance().getReference().getDatabase();
-            databaseReference = firebaseDatabase.getReference(product_name);
-            databaseReference.child("Date exp").setValue(product_dateexp);
-
-            databaseReference.child("Ref").setValue(product_ref);
+         //   String[] str = content_result.split(",");
+          //  String product_name = str[0];
+          //  String product_ref = str[1];
+          //  String product_dateexp = str[2];
+           // firebaseDatabase= FirebaseDatabase.getInstance().getReference().getDatabase();
+          //  databaseReference = firebaseDatabase.getReference(product_name);
+          //  databaseReference.child("Date exp").setValue(product_dateexp);
+           // databaseReference.child("quantité").setValue(0);
+           // databaseReference.child("Ref").setValue(product_ref);
           //  exp_date = LocalDate.parse(product_dateexp);
 
             AlertDialog.Builder builder = new AlertDialog.Builder(camera.this);
             builder.setTitle("see products informations!");
-            builder.setMessage("Product :"+product_name);
-            builder.setMessage("Reference :"+product_ref);
-            builder.setMessage("STATUS:"+message_box);
+
             builder.setPositiveButton("add", new DialogInterface.OnClickListener()
             {
                 @Override
                 public void onClick(DialogInterface dialogInterface, int i)
                 {
-                    Intent def = new Intent(camera.this, custom_dialogue.class);
-                    startActivity(def);
+                    Intent sens = new Intent(camera.this, data.class);
+                    startActivity(sens);
 
 
-                }
-            }).show();
-            // format : name,number,ref
-
-
+                } // end of the onclick function
+            }).show(); // end of add button
 
 
 
 
-        }
-    });
 
 
 
-}
+        } // end of if statement
+    }); // end of the scan option
+
+
+
+ } // end of the class

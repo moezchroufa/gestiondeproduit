@@ -24,16 +24,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity
-            android:name="com.example.gestiondeproduit.custom_dialogue"
-            android:label="@string/gestiondeproduit"
-            android:exported="true">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
 
         <activity
             android:name="com.example.gestiondeproduit.SignupActivity"
@@ -55,6 +46,15 @@
         </activity>
         <activity
             android:name="com.example.gestiondeproduit.dashboard"
+            android:exported="true" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name="com.example.gestiondeproduit.data"
             android:exported="true" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
