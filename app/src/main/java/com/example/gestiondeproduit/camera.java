@@ -18,6 +18,8 @@ import com.journeyapps.barcodescanner.ScanContract;
 import com.journeyapps.barcodescanner.ScanOptions;
 import com.learntodroid.pfescanner.R;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -26,7 +28,7 @@ import java.util.Date;
 
 public class camera extends AppCompatActivity {
 
-    public String content_result;
+    public static String content_result;
     Button btn_scan;
     DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd/MM/yyyy");
     LocalDateTime now;
@@ -50,7 +52,7 @@ public class camera extends AppCompatActivity {
             scanCode();
         });
     }
-    public String getContent_result(){
+    public static String getContent_result(){
         return content_result;
     }
 
@@ -69,10 +71,10 @@ public class camera extends AppCompatActivity {
         if(result.getContents() !=null)
         {
             content_result = result.getContents();
-         //   String[] str = content_result.split(",");
+            String[] str = content_result.split(",");
           //  String product_name = str[0];
           //  String product_ref = str[1];
-          //  String product_dateexp = str[2];
+            String product_dateexp = str[2];
            // firebaseDatabase= FirebaseDatabase.getInstance().getReference().getDatabase();
           //  databaseReference = firebaseDatabase.getReference(product_name);
           //  databaseReference.child("Date exp").setValue(product_dateexp);
@@ -80,10 +82,11 @@ public class camera extends AppCompatActivity {
            // databaseReference.child("Ref").setValue(product_ref);
           //  exp_date = LocalDate.parse(product_dateexp);
 
-            AlertDialog.Builder builder = new AlertDialog.Builder(camera.this);
-            builder.setTitle("see products informations!");
 
-            builder.setPositiveButton("add", new DialogInterface.OnClickListener()
+            AlertDialog.Builder builder = new AlertDialog.Builder(camera.this);
+            builder.setTitle("un produit est detecter!");
+
+            builder.setPositiveButton("ajouter", new DialogInterface.OnClickListener()
             {
                 @Override
                 public void onClick(DialogInterface dialogInterface, int i)
@@ -93,6 +96,12 @@ public class camera extends AppCompatActivity {
 
 
                 } // end of the onclick function
+            }).setNegativeButton("annuler", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialogInterface, int i) {
+                    finish();
+
+                }
             }).show(); // end of add button
 
 

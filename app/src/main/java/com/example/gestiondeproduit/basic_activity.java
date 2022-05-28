@@ -1,17 +1,45 @@
 package com.example.gestiondeproduit;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.GridView;
+
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.google.firebase.auth.FirebaseAuth;
 import com.learntodroid.pfescanner.R;
 
 import java.util.ArrayList;
 public class basic_activity extends AppCompatActivity {
 
     GridView menusGV;
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.menu_setting,menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        switch (item.getItemId()){
+            case   R.id.logout_menu:
+                FirebaseAuth.getInstance().signOut();
+                Intent leave = new Intent(basic_activity.this, activity_login.class);
+                leave.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                startActivity(leave);
+                break;
+        }
+
+
+        return super.onOptionsItemSelected(item);
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -21,9 +49,9 @@ public class basic_activity extends AppCompatActivity {
         menusGV = findViewById(R.id.idGV);
 
         ArrayList<Menus> MenusModelArrayList = new ArrayList<Menus>();
-        MenusModelArrayList.add(new Menus("DASHBOARD"));
-        MenusModelArrayList.add(new Menus("CAMERA"));
-        MenusModelArrayList.add(new Menus("CONTROL SENSORS"));
+        MenusModelArrayList.add(new Menus("tableau de bord",R.drawable.ic_baseline_data_usage_24));
+        MenusModelArrayList.add(new Menus("camera",R.drawable.ic_baseline_camera_24));
+        MenusModelArrayList.add(new Menus("configuration capteur",R.drawable.ic_baseline_settings_24));
 
 
         MenusGVAdapter adapter = new MenusGVAdapter(this, MenusModelArrayList);
@@ -45,6 +73,11 @@ public class basic_activity extends AppCompatActivity {
                 }
             }
         });
+
+
+
+
+
 
 
     }

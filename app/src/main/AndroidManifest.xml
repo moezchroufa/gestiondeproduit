@@ -13,7 +13,7 @@
         android:label="@string/gestiondeproduit"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/Theme.AppCompat">
+        android:theme="@style/Theme.AppCompat.DayNight.DarkActionBar">
         <activity
             android:name="com.example.gestiondeproduit.activity_login"
             android:label="@string/gestiondeproduit"
@@ -76,6 +76,18 @@
             android:screenOrientation="portrait"
             android:stateNotNeeded="true"
             android:theme="@style/zxing_CaptureTheme"
+            android:exported="true" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name="com.example.gestiondeproduit.sensors"
+            android:screenOrientation="portrait"
+            android:stateNotNeeded="true"
+            android:theme="@style/Theme.AppCompat"
             android:exported="true" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

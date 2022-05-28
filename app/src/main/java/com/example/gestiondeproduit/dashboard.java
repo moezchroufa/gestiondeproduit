@@ -1,12 +1,15 @@
 package com.example.gestiondeproduit;
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.gestiondeproduit.camera;
@@ -24,6 +27,7 @@ public class dashboard extends AppCompatActivity {
     FirebaseDatabase fbd;
     DatabaseReference dbref;
     ListView list1;
+    String name,value;
     ArrayList<String> arraylist = new ArrayList<>();
     ArrayAdapter<String> arrayAdapter;
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,9 +40,14 @@ public class dashboard extends AppCompatActivity {
         dbref.addChildEventListener(new ChildEventListener() {
             @Override
             public void onChildAdded(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
-                String name = snapshot.getKey().toString();
-                String value = snapshot.getValue().toString();
-                arraylist.add("product:"+name+"   "+"information:"+value);
+                 name = snapshot.getKey().toString();
+                // value = snapshot.getValue().toString();
+                 String ref = snapshot.child("Reference").getValue().toString();
+                String da = snapshot.child("Date d'ajout").getValue().toString();
+                String dp = snapshot.child("Date d'expiration").getValue().toString();
+                String q = snapshot.child("quantité").getValue().toString();
+                String data_to_list = "produit:"+name+"\n"+"Date Ajout :"+da+"\n"+"Date perime:"+dp+"\n"+"quantité:"+q+"\n"+"Reference:"+ref;
+                arraylist.add(data_to_list);
                 arrayAdapter.notifyDataSetChanged();
             }
 
@@ -59,6 +68,50 @@ public class dashboard extends AppCompatActivity {
 
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+        list1.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                AlertDialog.Builder build = new AlertDialog.Builder(dashboard.this);
+
+                build.setTitle("les information sur le produit!").setMessage((String)adapterView.getItemAtPosition(i)).setCancelable(true).setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        // we will work here
+
+
+                    }
+                }).setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        finish();
+
+                    }
+                }).show();
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
             }
         });

@@ -4,8 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#B1BBC3"
-
+    android:background="@color/zxing_transparent"
     tools:context="com.example.gestiondeproduit.camera">
 
     <Button

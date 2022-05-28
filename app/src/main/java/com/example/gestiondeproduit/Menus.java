@@ -4,7 +4,7 @@ public class Menus {
     private  String activity_name;
     private  int imgid;
 
-    public Menus(String activity_name) {
+    public Menus(String activity_name,int imgid) {
         this.activity_name = activity_name;
         this.imgid = imgid;
     }
