@@ -36,7 +36,6 @@ public class camera extends AppCompatActivity {
     String message_box;
 
 
-
     public FirebaseDatabase firebaseDatabase; // entry point
     public DatabaseReference databaseReference;
     @Override
@@ -48,7 +47,6 @@ public class camera extends AppCompatActivity {
         btn_scan.setOnClickListener(v->
         {
             now = LocalDateTime.now();
-
             scanCode();
         });
     }
