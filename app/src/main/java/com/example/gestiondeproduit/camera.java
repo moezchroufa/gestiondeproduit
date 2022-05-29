@@ -72,7 +72,7 @@ public class camera extends AppCompatActivity {
             String[] str = content_result.split(",");
           //  String product_name = str[0];
           //  String product_ref = str[1];
-            String product_dateexp = str[2];
+            String product_dateexp = str[1];
            // firebaseDatabase= FirebaseDatabase.getInstance().getReference().getDatabase();
           //  databaseReference = firebaseDatabase.getReference(product_name);
           //  databaseReference.child("Date exp").setValue(product_dateexp);

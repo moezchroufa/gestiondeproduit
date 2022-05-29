@@ -18,6 +18,7 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.database.annotations.Nullable;
 import com.learntodroid.pfescanner.R;
 
@@ -30,40 +31,28 @@ public class dashboard extends AppCompatActivity {
     String name,value;
     ArrayList<String> arraylist = new ArrayList<>();
     ArrayAdapter<String> arrayAdapter;
+
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.dashboard);
         list1 = (ListView) findViewById(R.id.list1);
-        dbref = FirebaseDatabase.getInstance().getReference();
+
+        dbref = FirebaseDatabase.getInstance().getReference("produit").getRef();
         arrayAdapter= new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1,arraylist);
         list1.setAdapter(arrayAdapter);
-        dbref.addChildEventListener(new ChildEventListener() {
+
+
+
+
+
+        dbref.addValueEventListener(new ValueEventListener() {
             @Override
-            public void onChildAdded(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
-                 name = snapshot.getKey().toString();
-                // value = snapshot.getValue().toString();
-                 String ref = snapshot.child("Reference").getValue().toString();
-                String da = snapshot.child("Date d'ajout").getValue().toString();
-                String dp = snapshot.child("Date d'expiration").getValue().toString();
-                String q = snapshot.child("quantité").getValue().toString();
-                String data_to_list = "produit:"+name+"\n"+"Date Ajout :"+da+"\n"+"Date perime:"+dp+"\n"+"quantité:"+q+"\n"+"Reference:"+ref;
-                arraylist.add(data_to_list);
-                arrayAdapter.notifyDataSetChanged();
-            }
-
-            @Override
-            public void onChildChanged(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
-
-            }
-
-            @Override
-            public void onChildRemoved(@NonNull DataSnapshot snapshot) {
-
-            }
-
-            @Override
-            public void onChildMoved(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
-
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                for (DataSnapshot ds :snapshot.getChildren()){
+                    String a = "Nom produit:"+ds.getValue().toString();
+                    arraylist.add(a);
+                    arrayAdapter.notifyDataSetChanged();
+                }
             }
 
             @Override

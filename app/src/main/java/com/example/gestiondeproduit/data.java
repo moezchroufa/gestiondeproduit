@@ -39,11 +39,11 @@ public class data extends AppCompatActivity {
 
     String[] str = text_from_qrcode.split(",");
     String product_name = str[0];
-    String product_ref = str[1];
-    String product_dateexp = str[2];
+
+    String product_dateexp = str[1];
 
     FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance().getReference().getDatabase();
-    DatabaseReference databaseReference = firebaseDatabase.getReference("produit");
+    DatabaseReference databaseReference = firebaseDatabase.getReference("produit").child(product_name);
 
 
 
@@ -62,29 +62,8 @@ public class data extends AppCompatActivity {
         }
         numberProducts = (EditText) findViewById(R.id.btnNumber);
         btn_add =(Button) findViewById(R.id.button_ok);
-        // check product storage
-        databaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                if (snapshot.child("quantité").exists()){
-                    if (snapshot.child("quantié").getValue().toString() == "1"){
-                        NotificationCompat.Builder builder = new NotificationCompat.Builder(data.this,"myNotification");
-                        builder.setContentTitle("Alert");
-                        builder.setContentText("produit"+snapshot.getKey()+" low storage!");
-                        builder.setSmallIcon(R.drawable.ic_launcher_background);
-                        builder.setAutoCancel(true);
 
-                        NotificationManagerCompat manager = NotificationManagerCompat.from(data.this);
-                        manager.notify(1,builder.build());
-                    }
-                }
-            }
 
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-
-            }
-        });
 
          btn_add.setOnClickListener(new View.OnClickListener() {
              @Override
@@ -98,7 +77,7 @@ public class data extends AppCompatActivity {
 
                  databaseReference.child("Nom produit:").setValue(product_name);
                  databaseReference.child("Date d'expiration").setValue(product_dateexp);
-                 databaseReference.child("Reference").setValue(product_ref);
+
                  databaseReference.child("quantité").setValue(result_input);
                  databaseReference.child("Date d'ajout").setValue(currentDateandTime);
                  Log.w(TAG, "product added :", null);
