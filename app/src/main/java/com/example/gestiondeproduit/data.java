@@ -75,12 +75,11 @@ public class data extends AppCompatActivity {
                  SimpleDateFormat sdf = new SimpleDateFormat("dd/mm/yyyy", Locale.getDefault());
                  String currentDateandTime = sdf.format(new Date());
 
-                 databaseReference.child("Nom produit:").setValue(product_name);
-                 databaseReference.child("Date d'expiration").setValue(product_dateexp);
+                 databaseReference.child("Nom").setValue(product_name);
+                 databaseReference.child("dateDexpiration").setValue(product_dateexp);
 
-                 databaseReference.child("quantité").setValue(result_input);
+                 databaseReference.child("quantite").setValue(result_input);
                  databaseReference.child("Date d'ajout").setValue(currentDateandTime);
-                 Log.w(TAG, "product added :", null);
 
                  NotificationCompat.Builder builder = new NotificationCompat.Builder(data.this,"myNotification");
                  builder.setContentTitle("new");
