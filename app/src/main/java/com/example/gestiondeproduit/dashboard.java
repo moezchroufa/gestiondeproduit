@@ -50,13 +50,14 @@ public class dashboard extends AppCompatActivity {
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 for (DataSnapshot ds :snapshot.getChildren()){
                     String product_name = ds.getKey().toString();
-                    String[] product_value = ds.getValue().toString().split(",");
-                    String Q = product_value[0].substring(1);
-                    String DE = product_value[1];
-                    String DA = product_value[2];
-                    String N = product_value[3];
-                    String a = product_name+"\n"+Q+"\n"+DA+"\n"+DE+"\n";
-                    arraylist.add(a);
+                    String product_value = ds.getValue().toString();
+                   // String[] product_value = ds.getValue().toString().split(",");
+                   // String Q = product_value[0];
+                   // String DE = product_value[1];
+                   // String DA = product_value[2];
+                   // String N = product_value[3];
+                   // String a = product_name+"\n"+Q+"\n"+DA+"\n"+DE+"\n";
+                    arraylist.add("Produit"+product_name+"\n"+"Informations:"+"\n"+product_value);
                     arrayAdapter.notifyDataSetChanged();
                 }
             }

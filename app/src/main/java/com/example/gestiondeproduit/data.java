@@ -68,17 +68,15 @@ public class data extends AppCompatActivity {
          btn_add.setOnClickListener(new View.OnClickListener() {
              @Override
              public void onClick(View view) {
-                 String result_input = numberProducts.getText().toString();
-                 if (result_input.equalsIgnoreCase("")){
-                     result_input = "1";
-                 }
+            //     String result_input = numberProducts.getText().toString().trim();
+
                  SimpleDateFormat sdf = new SimpleDateFormat("dd/mm/yyyy", Locale.getDefault());
                  String currentDateandTime = sdf.format(new Date());
 
                  databaseReference.child("Nom").setValue(product_name);
                  databaseReference.child("dateDexpiration").setValue(product_dateexp);
 
-                 databaseReference.child("quantite").setValue(result_input);
+                 databaseReference.child("quantite").setValue(numberProducts.getText().toString().trim());
                  databaseReference.child("Date d'ajout").setValue(currentDateandTime);
 
                  NotificationCompat.Builder builder = new NotificationCompat.Builder(data.this,"myNotification");
