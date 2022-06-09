@@ -30,10 +30,13 @@ public class camera extends AppCompatActivity {
 
     public static String content_result;
     Button btn_scan;
-    DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-    LocalDateTime now;
+    SimpleDateFormat dtf;
+
     LocalDate exp_date,conversion_date;
-    String message_box;
+    static String message_box;
+    Date date1;
+    Date date2;
+    LocalDateTime now ;
 
 
     public FirebaseDatabase firebaseDatabase; // entry point
@@ -43,10 +46,17 @@ public class camera extends AppCompatActivity {
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.cameraactivityx);
+        now = LocalDateTime.now();
+        dtf = new SimpleDateFormat("dd/mm/yyyy");
+        try {
+            date2 = dtf.parse(now.toString());
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
         btn_scan =findViewById(R.id.btn_scan);
         btn_scan.setOnClickListener(v->
         {
-            now = LocalDateTime.now();
+
             scanCode();
         });
     }
@@ -70,7 +80,7 @@ public class camera extends AppCompatActivity {
         {
             content_result = result.getContents();
             String[] str = content_result.split(",");
-          //  String product_name = str[0];
+            String product_name = str[0];
           //  String product_ref = str[1];
             String product_dateexp = str[1];
            // firebaseDatabase= FirebaseDatabase.getInstance().getReference().getDatabase();
@@ -80,9 +90,21 @@ public class camera extends AppCompatActivity {
            // databaseReference.child("Ref").setValue(product_ref);
           //  exp_date = LocalDate.parse(product_dateexp);
 
+            try {
+                date1 = dtf.parse(product_dateexp);
+
+            } catch (ParseException e) {
+                e.printStackTrace();
+            }
+            if (date1.compareTo(date2) > 0){
+                message_box = "en bonne état!";
+            }else{
+                message_box =" périmé !";
+            }
 
             AlertDialog.Builder builder = new AlertDialog.Builder(camera.this);
-            builder.setTitle("un produit est detecter!");
+            builder.setTitle("un produit à été détecté!!");
+            builder.setMessage("Produit:"+"\n"+product_name+"\n"+"Date expiration:"+"\n"+product_dateexp+"status:"+message_box);
 
             builder.setPositiveButton("ajouter", new DialogInterface.OnClickListener()
             {

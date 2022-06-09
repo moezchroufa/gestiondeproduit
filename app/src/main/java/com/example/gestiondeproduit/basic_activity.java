@@ -49,9 +49,9 @@ public class basic_activity extends AppCompatActivity {
         menusGV = findViewById(R.id.idGV);
 
         ArrayList<Menus> MenusModelArrayList = new ArrayList<Menus>();
-        MenusModelArrayList.add(new Menus("tableau de bord",R.drawable.ic_baseline_data_usage_24));
-        MenusModelArrayList.add(new Menus("camera",R.drawable.ic_baseline_camera_24));
-        MenusModelArrayList.add(new Menus("configuration capteur",R.drawable.ic_baseline_settings_24));
+        MenusModelArrayList.add(new Menus("tableau de bord",R.drawable.first_image));
+        MenusModelArrayList.add(new Menus("camera",R.drawable.first_camera));
+        MenusModelArrayList.add(new Menus("configuration capteur",R.drawable.first_setting));
 
 
         MenusGVAdapter adapter = new MenusGVAdapter(this, MenusModelArrayList);

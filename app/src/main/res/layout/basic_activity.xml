@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#FFFFFF"
+    android:background="#E8ECECEC"
 
     tools:context="com.example.gestiondeproduit.basic_activity">
 
@@ -13,7 +13,7 @@
         android:id="@+id/idGV"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_margin="60dp"
+        android:layout_margin="70dp"
         android:horizontalSpacing="10dp"
         android:numColumns="1"
         android:padding="10dp"

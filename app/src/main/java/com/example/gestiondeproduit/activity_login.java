@@ -57,23 +57,23 @@ public class activity_login extends AppCompatActivity{
     boolean validateInput() {
 
         if (etEmail.getText().toString().equals("")) {
-            etEmail.setError("Please Enter Email");
+            etEmail.setError("saisir votre email");
             return false;
         }
         if (etPassword.getText().toString().equals("")) {
-            etPassword.setError("Please Enter Password");
+            etPassword.setError("saisir votre mote de passe");
             return false;
         }
 
         // checking the proper email format
         if (!isEmailValid(etEmail.getText().toString())) {
-            etEmail.setError("Please Enter Valid Email");
+            etEmail.setError("Adresse email invalide!");
             return false;
         }
 
         // checking minimum password Length
         if (etPassword.getText().length() < MIN_PASSWORD_LENGTH) {
-            etPassword.setError("Password Length must be more than " + MIN_PASSWORD_LENGTH + "characters");
+            etPassword.setError("Mot de passe invalide, taille min est " + MIN_PASSWORD_LENGTH);
             return false;
         }
 

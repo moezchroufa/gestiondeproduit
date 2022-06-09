@@ -43,7 +43,7 @@ public class data extends AppCompatActivity {
     String product_dateexp = str[1];
 
     FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance().getReference().getDatabase();
-    DatabaseReference databaseReference = firebaseDatabase.getReference("produit").child(product_name);
+    DatabaseReference databaseReference = firebaseDatabase.getReference("produit").push();
 
 
 
@@ -63,21 +63,17 @@ public class data extends AppCompatActivity {
         numberProducts = (EditText) findViewById(R.id.btnNumber);
         btn_add =(Button) findViewById(R.id.button_ok);
 
-
+        databaseReference.child("Nom").setValue(product_name);
+        databaseReference.child("dateDexpiration").setValue(product_dateexp);
 
          btn_add.setOnClickListener(new View.OnClickListener() {
              @Override
              public void onClick(View view) {
             //     String result_input = numberProducts.getText().toString().trim();
 
-                 SimpleDateFormat sdf = new SimpleDateFormat("dd/mm/yyyy", Locale.getDefault());
-                 String currentDateandTime = sdf.format(new Date());
-
-                 databaseReference.child("Nom").setValue(product_name);
-                 databaseReference.child("dateDexpiration").setValue(product_dateexp);
 
                  databaseReference.child("quantite").setValue(numberProducts.getText().toString().trim());
-                 databaseReference.child("Date d'ajout").setValue(currentDateandTime);
+
 
                  NotificationCompat.Builder builder = new NotificationCompat.Builder(data.this,"myNotification");
                  builder.setContentTitle("new");

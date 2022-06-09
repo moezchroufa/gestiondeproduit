@@ -57,7 +57,7 @@ public class dashboard extends AppCompatActivity {
                    // String DA = product_value[2];
                    // String N = product_value[3];
                    // String a = product_name+"\n"+Q+"\n"+DA+"\n"+DE+"\n";
-                    arraylist.add("Produit"+product_name+"\n"+"Informations:"+"\n"+product_value);
+                    arraylist.add(product_value);
                     arrayAdapter.notifyDataSetChanged();
                 }
             }
@@ -72,17 +72,11 @@ public class dashboard extends AppCompatActivity {
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 AlertDialog.Builder build = new AlertDialog.Builder(dashboard.this);
 
-                build.setTitle("les information sur le produit!").setMessage((String)adapterView.getItemAtPosition(i)).setCancelable(true).setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                build.setTitle("Information sur le produit").setMessage((String)adapterView.getItemAtPosition(i)).setCancelable(true).setPositiveButton("OK", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
                         // we will work here
 
-
-                    }
-                }).setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialogInterface, int i) {
-                        finish();
 
                     }
                 }).show();
