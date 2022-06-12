@@ -37,7 +37,6 @@ public class basic_activity extends AppCompatActivity {
                 break;
         }
 
-
         return super.onOptionsItemSelected(item);
     }
 

@@ -37,6 +37,7 @@ public class camera extends AppCompatActivity {
     Date date1;
     Date date2;
     LocalDateTime now ;
+    int catalog_outdated;
 
 
     public FirebaseDatabase firebaseDatabase; // entry point
@@ -46,13 +47,6 @@ public class camera extends AppCompatActivity {
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.cameraactivityx);
-        now = LocalDateTime.now();
-        dtf = new SimpleDateFormat("dd/mm/yyyy");
-        try {
-            date2 = dtf.parse(now.toString());
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
         btn_scan =findViewById(R.id.btn_scan);
         btn_scan.setOnClickListener(v->
         {
@@ -89,17 +83,20 @@ public class camera extends AppCompatActivity {
            // databaseReference.child("quantité").setValue(0);
            // databaseReference.child("Ref").setValue(product_ref);
           //  exp_date = LocalDate.parse(product_dateexp);
-
+            SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+            Date strDate = null;
             try {
-                date1 = dtf.parse(product_dateexp);
-
+                strDate = sdf.parse(product_dateexp);
             } catch (ParseException e) {
                 e.printStackTrace();
             }
-            if (date1.compareTo(date2) > 0){
-                message_box = "en bonne état!";
+            if (new Date().after(strDate)) {
+                catalog_outdated = 1;
+            }
+            if (catalog_outdated == 1){
+                message_box = "perimé";
             }else{
-                message_box =" périmé !";
+                message_box = "Normal";
             }
 
             AlertDialog.Builder builder = new AlertDialog.Builder(camera.this);
