@@ -101,7 +101,7 @@ public class camera extends AppCompatActivity {
 
             AlertDialog.Builder builder = new AlertDialog.Builder(camera.this);
             builder.setTitle("un produit à été détecté!!");
-            builder.setMessage("Produit:"+"\n"+product_name+"\n"+"Date expiration:"+"\n"+product_dateexp+"status:"+message_box);
+            builder.setMessage("Produit:"+"\n"+product_name+"\n"+"Date expiration:"+"\n"+product_dateexp+"\n"+"status:"+"\n"+message_box);
 
             builder.setPositiveButton("ajouter", new DialogInterface.OnClickListener()
             {

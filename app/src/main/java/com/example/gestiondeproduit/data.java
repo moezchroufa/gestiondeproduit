@@ -21,6 +21,7 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 import com.learntodroid.pfescanner.R;
 
@@ -87,6 +88,45 @@ public class data extends AppCompatActivity {
                  startActivity(sens);
              }
          });
+
+
+        databaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                String current_val = dataSnapshot.child("quantite").getValue().toString();
+                int val_int = Integer.parseInt(current_val);
+                if (val_int <=10){
+
+                    NotificationCompat.Builder builder = new NotificationCompat.Builder(data.this,"myNotification");
+                    builder.setContentTitle("attention");
+                    builder.setContentText("produit est va etre indisponbile!!");
+                    builder.setSmallIcon(R.drawable.ic_launcher_background);
+                    builder.setAutoCancel(true);
+                    NotificationManagerCompat manager = NotificationManagerCompat.from(data.this);
+                    manager.notify(1,builder.build());
+
+
+
+                }
+
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+
+        });
+
+
+
+
+
+
+
+
+
 
 
 
