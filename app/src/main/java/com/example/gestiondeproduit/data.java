@@ -89,8 +89,8 @@ public class data extends AppCompatActivity {
              }
          });
 
-
-        databaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
+         DatabaseReference newref  = firebaseDatabase.getReference().child("produit").child("quantite");
+        newref.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 String current_val = dataSnapshot.child("quantite").getValue().toString();
